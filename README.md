@@ -1,5 +1,7 @@
 # snippets
 
+Lest we forget...
+
 2021-08-09 - fast tropmask
 
 ```python
