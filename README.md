@@ -9,6 +9,7 @@
       press.mask.to_netcdf(jobid+'_mask.nc',encoding={"mask": {"dtype": "f8"}})
 
 2021-08-09 - multiindex
+
       latboxes = [[-90,-30],[-30,0],[0,30],[30,90]]
       midpt_lat = np.zeros(len(latboxes))
       for ivar in range(0,len(latboxes)):
@@ -19,6 +20,7 @@
       ann_data.loc[latmid, pmid/100., tmp_vals.index[ivar]]['oh'] = trends.data[ivar]
 
 2021-08-11 - categorical colorbar
+
       map = Basemap(projection='merc',  llcrnrlon=-120.,llcrnrlat=0.,urcrnrlon=70.,urcrnrlat=60.)
       # convert 1D matrices into 2D fill matrices for processing:
       x,y = (NA_toar_data.lon.data, NA_toar_data.lat.data)
