@@ -69,6 +69,19 @@ notify(title    = 'A Real Notification',
 
 ```bash
 #!/bin/bash
+for filename in $1*.nc; do
+	ncatted -h -a contact,global,o,c,"Paul Griffiths paul.griffiths@ncas.ac.uk" ${filename}
+	ncatted -h -a institution,global,o,c,"National Centre for Atmospheric Science" ${filename}
+	ncatted -h -a project,global,o,c,"UKRI NERC C-CLEAR DTP, grant reference number:  NE/S007164/1" ${filename}
+	ncatted -h -a model,global,o,c,"Data were generated using the UK Earth System Model version 1 (UKESM-1) at N96 horizontal resolution over global domain." ${filename}
+	ncatted -h -a model_description,global,o,c,"Staniaszek et al. (2021) Climate and air quality benefits from a net-zeroanthropogenic methane emissions scenario" ${filename}
+	ncatted -h -a run,global,o,c,"uby186 is a climate simulation for Year 2000 with methane emissions" ${filename}
+	ncatted -h -a run_experiment,global,o,c,"NZAME - Year 2015-2050 with Net-Zero anthropogenic methane emissions" ${filename}
+done
+```
+
+```bash
+#!/bin/bash
 
 # script to :
 # generate maps of averaged monthly data
