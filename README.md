@@ -2,6 +2,57 @@
 
 Lest we forget...
 
+2021-10-07 - two ways with significance testing
+
+```python
+def ks_mask_out_insig(cube1, cube2, nyears1, nyears2):
+    from scipy.stats import ks_2samp
+    import iris
+    conf = 0.2
+    lats = cube1.coord('latitude').points
+    lons = cube2.coord('longitude').points
+    store_statmask1=np.zeros([len(lats),len(lons)])
+    store_base1 = cube1.data.data
+    store_anom1 = cube2.data.data
+    # If the difference between the baseline and anomaly ensembles is statistically significant
+    # at the 95% confidence level according to a K-S test don't stipple, ie set mask = 0.
+    for a in range(len(lats)):
+        for b in range(len(lons)):
+            (stat1,pval1)=ks_2samp(store_base1[:,a,b],store_anom1[:,a,b])
+            if pval1<conf:
+                store_statmask1[a,b]=1.0
+    return store_statmask1
+    
+    
+def masked_mean_3d(base_cube,expt_cube, t_cut):
+    import scipy
+    import scipy.stats
+    import numpy as np
+
+    P_test=0.05
+
+    base=np.float64(base_cube.data[t_cut:,:,:])
+    expt=np.float64(expt_cube.data[t_cut:,:,:])
+    lon0=np.array(base_cube.coord('longitude').points,dtype=np.float64)
+    lat=np.array(base_cube.coord('latitude').points,dtype=np.float64)
+
+    T_vals,P_vals=scipy.stats.ttest_ind(base, expt, axis=0, equal_var=False)
+
+    # If the p-value is greater than the threshold, then we accept the null hypothesis of equal averages and MASK OUT
+    # see https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.mstats.ttest_ind.html
+    mask_out_for_insig=np.ones([len(lat), len(lon0)], dtype=np.float64)
+    i=0
+    while i < len(lat):
+        j=0
+        while j < len(lon0):
+            if P_vals[i,j] > P_test:
+#               print("!!!")
+               mask_out_for_insig[i,j] = 0.
+            j = j+1
+        i = i+1
+    return mask_out_for_insig
+```
+
 2021-08-09 - fast tropmask
 
 ```python
