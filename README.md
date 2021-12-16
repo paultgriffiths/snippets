@@ -4,6 +4,11 @@ Lest we forget...
 
 2021-10-07 - two ways with significance testing
 
+VSCODE - search for unique lines and delete duplicates
+
+search ``` ^(.*)(\n\1)+$ ```
+replace ``` $1 ```
+
 ```python
 def ks_mask_out_insig(cube1, cube2, nyears1, nyears2):
     from scipy.stats import ks_2samp
