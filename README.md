@@ -7,6 +7,7 @@ Lest we forget...
 VSCODE - search for unique lines and delete duplicates
 
 search ``` ^(.*)(\n\1)+$ ```
+
 replace ``` $1 ```
 
 ```python
