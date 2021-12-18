@@ -10,7 +10,7 @@ search ``` ^(.*)(\n\1)+$ ```
 
 replace ``` $1 ```
 
-'''python
+```python
 
 # create xarray data frame
 
