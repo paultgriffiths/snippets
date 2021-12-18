@@ -10,6 +10,15 @@ search ``` ^(.*)(\n\1)+$ ```
 
 replace ``` $1 ```
 
+'''python
+
+# create xarray data frame
+
+xr.DataArray(ljw_aod.tas.data,
+                            coords=[ljw_aod.time, ljw_aod.latitude, ljw_aod.longitude],
+                            dims=['time', 'lat', 'lon'])
+```
+
 ```python
 def ks_mask_out_insig(cube1, cube2, nyears1, nyears2):
     from scipy.stats import ks_2samp
