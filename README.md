@@ -1,14 +1,20 @@
 # snippets
 
 Lest we forget...
+## Pandas
+df.dropna(thresh=2)   #Drop row if it does not have at least two values that are **not** NaN
+data2 = data.dropna(subset = ['review_scores_rating']) #drop row is column contains NaN
 
-2021-10-07 - two ways with significance testing
 
-VSCODE - search for unique lines and delete duplicates
+
+
+## VSCODE - search for unique lines and delete duplicates
 
 search ``` ^(.*)(\n\1)+$ ```
 
 replace ``` $1 ```
+
+## 2021-10-07 - two ways with significance testing
 
 ```python
 
@@ -68,7 +74,7 @@ def masked_mean_3d(base_cube,expt_cube, t_cut):
     return mask_out_for_insig
 ```
 
-2021-08-09 - fast tropmask
+## 2021-08-09 - fast tropmask
 
 ```python
 import xarray as xr
@@ -78,7 +84,7 @@ press['mask'] = press.mask.where(press.level_height<tropht.trop_hgt,other=0.)
 press.mask.to_netcdf(jobid+'_mask.nc',encoding={"mask": {"dtype": "f8"}})
 ```
 
-2021-08-09 - multiindex
+### 2021-08-09 - Pandas multiindex
 
 ```python
 latboxes = [[-90,-30],[-30,0],[0,30],[30,90]]
