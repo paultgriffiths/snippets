@@ -2,10 +2,12 @@
 
 Lest we forget...
 ## Pandas
+```python
+
 df.dropna(thresh=2)   #Drop row if it does not have at least two values that are **not** NaN
 data2 = data.dropna(subset = ['review_scores_rating']) #drop row is column contains NaN
 
-
+```
 
 
 ## VSCODE - search for unique lines and delete duplicates
