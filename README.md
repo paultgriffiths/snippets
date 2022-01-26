@@ -3,20 +3,26 @@
 Lest we forget...
 ## Pandas
 ```python
-
+#
+# Drop NA from Dataframe
+#
 df.dropna(thresh=2)   #Drop row if it does not have at least two values that are **not** NaN
 data2 = data.dropna(subset = ['review_scores_rating']) #drop row is column contains NaN
+
+#
+# remove data that are 3 s.d. away from mean
+#
 
 def zscore(sample):
     mean = sample.mean()
     std = sample.std()
     return (sample - mean) / std
-
-# remove data that are 3 s.d. away from mean
+    
 to_drop = data[(zscore(data.square_feet)<3) & (zscore(data.price)<3)]
 
+#
 # scaling dataframe columns
-
+#
 # cont_vars = column names as list of strings
 from sklearn.preprocessing import StandardScaler
 stander = StandardScaler()
