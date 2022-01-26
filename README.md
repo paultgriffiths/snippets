@@ -15,6 +15,15 @@ def zscore(sample):
 # remove data that are 3 s.d. away from mean
 to_drop = data[(zscore(data.square_feet)<3) & (zscore(data.price)<3)]
 
+# scaling dataframe columns
+
+# cont_vars = column names as list of strings
+from sklearn.preprocessing import StandardScaler
+stander = StandardScaler()
+pd.DataFrame(stander.fit_transform(data[cont_vars]), columns=cont_vars)
+
+
+
 ```
 
 
