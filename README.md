@@ -7,6 +7,14 @@ Lest we forget...
 df.dropna(thresh=2)   #Drop row if it does not have at least two values that are **not** NaN
 data2 = data.dropna(subset = ['review_scores_rating']) #drop row is column contains NaN
 
+def zscore(sample):
+    mean = sample.mean()
+    std = sample.std()
+    return (sample - mean) / std
+
+# remove data that are 3 s.d. away from mean
+to_drop = data[(zscore(data.square_feet)<3) & (zscore(data.price)<3)]
+
 ```
 
 
