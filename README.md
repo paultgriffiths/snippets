@@ -30,6 +30,12 @@ pd.DataFrame(stander.fit_transform(data[cont_vars]), columns=cont_vars)
 
 
 
+# sane names
+start_end_years = [[1950,1975], [1979,2014]]
+for start_end_year in start_end_years:
+    start_year = start_end_year[0]
+    end_year = start_end_year[-1]
+
 ```
 
 
