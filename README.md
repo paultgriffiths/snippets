@@ -28,7 +28,21 @@ from sklearn.preprocessing import StandardScaler
 stander = StandardScaler()
 pd.DataFrame(stander.fit_transform(data[cont_vars]), columns=cont_vars)
 
+### 2021-08-09 - Pandas multiindex
 
+```python
+latboxes = [[-90,-30],[-30,0],[0,30],[30,90]]
+midpt_lat = np.zeros(len(latboxes))
+for ivar in range(0,len(latboxes)):
+  midpt_lat[ivar] = (latboxes[ivar][1] - latboxes[ivar][0])/2 + latboxes[ivar][0]
+ann_index = pd.MultiIndex.from_product(iterables = [midpt_lat,  midpt_p, ann_vals.index],  names=['latbox_deg', 'pbox_hpa', 'time'])
+ann_data = pd.DataFrame(np.zeros(ntimes//12*3*4), index=ann_index, columns=['oh'])
+# assign a series to a set of indices
+ann_data.loc[latmid, pmid/100., tmp_vals.index[ivar]]['oh'] = trends.data[ivar]
+```
+
+### 2022-07-17 - Pandas dataframe from Numpy vectors
+dataFrame = pd.DataFrame({'col1':np.arange(0,10), 'col2':np.arange(10,20)})
 
 # sane names
 start_end_years = [[1950,1975], [1979,2014]]
@@ -45,7 +59,7 @@ search ``` ^(.*)(\n\1)+$ ```
 
 replace ``` $1 ```
 
-## 2021-10-07 - two ways with significance testing
+# Xarray
 
 ```python
 
@@ -55,6 +69,8 @@ xr.DataArray(ljw_aod.tas.data,
                             coords=[ljw_aod.time, ljw_aod.latitude, ljw_aod.longitude],
                             dims=['time', 'lat', 'lon'])
 ```
+
+## 2021-10-07 - two ways with significance testing
 
 ```python
 def ks_mask_out_insig(cube1, cube2, nyears1, nyears2):
@@ -115,18 +131,7 @@ press['mask'] = press.mask.where(press.level_height<tropht.trop_hgt,other=0.)
 press.mask.to_netcdf(jobid+'_mask.nc',encoding={"mask": {"dtype": "f8"}})
 ```
 
-### 2021-08-09 - Pandas multiindex
-
-```python
-latboxes = [[-90,-30],[-30,0],[0,30],[30,90]]
-midpt_lat = np.zeros(len(latboxes))
-for ivar in range(0,len(latboxes)):
-  midpt_lat[ivar] = (latboxes[ivar][1] - latboxes[ivar][0])/2 + latboxes[ivar][0]
-ann_index = pd.MultiIndex.from_product(iterables = [midpt_lat,  midpt_p, ann_vals.index],  names=['latbox_deg', 'pbox_hpa', 'time'])
-ann_data = pd.DataFrame(np.zeros(ntimes//12*3*4), index=ann_index, columns=['oh'])
-# assign a series to a set of indices
-ann_data.loc[latmid, pmid/100., tmp_vals.index[ivar]]['oh'] = trends.data[ivar]
-```
+# plotting
 
 2021-08-11 - categorical colorbar
 
