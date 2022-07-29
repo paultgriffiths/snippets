@@ -27,6 +27,7 @@ to_drop = data[(zscore(data.square_feet)<3) & (zscore(data.price)<3)]
 from sklearn.preprocessing import StandardScaler
 stander = StandardScaler()
 pd.DataFrame(stander.fit_transform(data[cont_vars]), columns=cont_vars)
+```
 
 ### 2021-08-09 - Pandas multiindex
 
@@ -42,22 +43,27 @@ ann_data.loc[latmid, pmid/100., tmp_vals.index[ivar]]['oh'] = trends.data[ivar]
 ```
 
 ### 2022-07-17 - Pandas dataframe from Numpy vectors
+```python
+
 dataFrame = pd.DataFrame({'col1':np.arange(0,10), 'col2':np.arange(10,20)})
+```
 
 # sane names
+
+```python 
 start_end_years = [[1950,1975], [1979,2014]]
 for start_end_year in start_end_years:
     start_year = start_end_year[0]
     end_year = start_end_year[-1]
-
 ```
 
 
 ## VSCODE - search for unique lines and delete duplicates
-
+```
 search ``` ^(.*)(\n\1)+$ ```
 
 replace ``` $1 ```
+```
 
 # Xarray
 
