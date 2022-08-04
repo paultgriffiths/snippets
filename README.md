@@ -277,3 +277,25 @@ for zzYear in ${year_array}; do
 	done
 done
 ```
+
+remove dim_0 error in netCDF generated from malformed PP files - see [here](https://sourceforge.net/p/nco/discussion/9830/thread/3d35b42d/)
+
+```sh
+for zzFilename in u-bh443*_tas.nc; do
+   [ -e "$zzFilename" ] || continue
+   # ... rest of the loop body
+  echo ${zzFilename} ${zzFilename}.fix
+   ncks -O -x -v dim0,surface_temp_0,time_0,forecast_period_0_bnds,forecast_period_0,time_0_bnds ${zzFilename} ${zzFilename}.fix
+done
+```
+
+fix time not being a record dimension in other Iris extracts
+
+```sh
+for zzFilename in u-br799*.nc; do
+   [ -e "$zzFilename" ] || continue
+   # ... rest of the loop body
+		echo ${zzFilename} ${zzFilename}.fix
+   ncks -O --mk_rec_dmn time ${zzFilename} ${zzFilename}.fix
+done
+```
