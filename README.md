@@ -46,6 +46,8 @@ ann_data.loc[latmid, pmid/100., tmp_vals.index[ivar]]['oh'] = trends.data[ivar]
 ```python
 
 dataFrame = pd.DataFrame({'col1':np.arange(0,10), 'col2':np.arange(10,20)})
+dataFrame = pd.DataFrame(zip(np.arange(0,10), np.arange(10,20)), columns=['col1','col2'])
+
 ```
 
 # sane names
