@@ -59,6 +59,11 @@ for start_end_year in start_end_years:
     end_year = start_end_year[-1]
 ```
 
+### MONSooN 
+
+```bash
+ssh USER@lander.monsoon-metoffice.co.uk "ssh xcsc \" cd && tar cf - NO_aircrft_anthropogenic_1849_2015_time_series.nc \" " | tar xvf -
+```
 
 ## VSCODE - search for unique lines and delete duplicates
 ```
