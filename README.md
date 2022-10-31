@@ -1,6 +1,16 @@
 # snippets
 
 Lest we forget...
+
+## Jupyter
+```python
+!jupyter kernelspec list
+```
+
+```python 
+!echo y | jupyter kernelspec uninstall geopandas-0.8-2022-10-20 
+```
+
 ## Pandas
 ```python
 #
