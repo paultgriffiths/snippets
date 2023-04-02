@@ -39,6 +39,13 @@ stander = StandardScaler()
 pd.DataFrame(stander.fit_transform(data[cont_vars]), columns=cont_vars)
 ```
 
+Ignore warnings after first warning
+
+```python
+import warnings
+warnings.filterwarnings(action='once') # https://stackoverflow.com/questions/9031783/hide-all-warnings-in-ipython 
+```
+
 ### 2021-08-09 - Pandas multiindex
 
 ```python
@@ -92,6 +99,16 @@ xr.DataArray(ljw_aod.tas.data,
                             coords=[ljw_aod.time, ljw_aod.latitude, ljw_aod.longitude],
                             dims=['time', 'lat', 'lon'])
 ```
+
+On chunking: [Dask pages](https://xarray.pydata.org/en/v0.10.2/dask.html)
+
+With analysis pipelines involving both spatial subsetting and temporal resampling, dask performance can become very slow in certain cases. Here are some optimization tips we have found through experience:
+
+1. Do your spatial and temporal indexing (e.g. .sel() or .isel()) early in the pipeline, especially before calling resample() or groupby(). Grouping and rasampling triggers some computation on all the blocks, which in theory should commute with indexing, but this optimization hasn’t been implemented in dask yet. (See dask issue #746).
+
+2. Save intermediate results to disk as a netCDF files (using to_netcdf()) and then load them again with open_dataset() for further computations. For example, if subtracting temporal mean from a dataset, save the temporal mean to disk before subtracting. Again, in theory, dask should be able to do the computation in a streaming fashion, but in practice this is a fail case for the dask scheduler, because it tries to keep every chunk of an array that it computes in memory. (See dask issue #874)
+
+3. Specify smaller chunks across space when using open_mfdataset() (e.g., chunks={'latitude': 10, 'longitude': 10}). This makes spatial subsetting easier, because there’s no risk you will load chunks of data referring to different chunks (probably not necessary if you follow suggestion 1).
 
 ## 2021-10-07 - two ways with significance testing
 
