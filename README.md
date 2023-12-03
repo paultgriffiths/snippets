@@ -7,6 +7,10 @@ Lest we forget...
 !jupyter kernelspec list
 ```
 
+```%store``` magic for lightweight persistence. ```%store -r``` to retrieve.  (https://ipython.readthedocs.io/en/stable/config/extensions/storemagic.html)
+
+
+
 ```python 
 !echo y | jupyter kernelspec uninstall geopandas-0.8-2022-10-20 
 ```
